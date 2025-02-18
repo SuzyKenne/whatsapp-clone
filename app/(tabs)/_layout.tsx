@@ -1,43 +1,106 @@
 import { Tabs } from 'expo-router';
 import React from 'react';
-import { Platform } from 'react-native';
-
-import { HapticTab } from '@/components/HapticTab';
-import { IconSymbol } from '@/components/ui/IconSymbol';
-import TabBarBackground from '@/components/ui/TabBarBackground';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
+import Icon from '../components/Icon';
+import colors from '../config/colors';
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         headerShown: false,
-        tabBarButton: HapticTab,
-        tabBarBackground: TabBarBackground,
-        tabBarStyle: Platform.select({
-          ios: {
-            // Use a transparent background on iOS to show the blur effect
-            position: 'absolute',
-          },
-          default: {},
-        }),
-      }}>
+        headerShadowVisible: false,
+        tabBarStyle: {
+          backgroundColor: colors.secondary,
+          height: 85,
+          justifyContent: 'space-between',
+          alignContent: 'center',
+          // color={isActive ? '#00A884' : '#8696A0'}
+          // paddingLeft: 2,
+        },
+        tabBarLabelStyle: {
+          color: colors.white,
+          fontWeight: 'bold',
+          paddingTop: 10,
+          fontSize: 13,
+          justifyContent: 'center',
+          alignContent: 'space-between',
+        },
+        tabBarActiveTintColor: colors.primary, // WhatsApp green or your preferred color
+        tabBarInactiveTintColor: 'gray',
+      }}
+    >
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+          title: 'Chats',
+          tabBarIcon: () => (
+            <Icon
+              name="message-text-outline"
+              size={50}
+              iconName="Chats"
+              style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+                paddingBottom: 35,
+              }}
+            />
+          ),
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="calls"
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+          title: 'Calls',
+          tabBarIcon: ({ color, size }) => (
+            <Icon
+              name="phone"
+              size={50}
+              iconName="Calls"
+              style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+                paddingBottom: 35,
+              }}
+            />
+          ),
+        }}
+      />
+
+      <Tabs.Screen
+        name="updates"
+        options={{
+          title: 'Updates',
+          tabBarIcon: ({ color, size }) => (
+            <Icon
+              name="repeat-outline"
+              size={50}
+              iconName="Updates"
+              iconType="material-community"
+              style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+                paddingBottom: 35,
+              }}
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="tools"
+        options={{
+          title: 'Tools',
+          tabBarIcon: ({ color, size }) => (
+            <Icon
+              name="cart-outline"
+              size={50}
+              iconName="Tools"
+              style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+                paddingBottom: 30,
+              }}
+            />
+          ),
         }}
       />
     </Tabs>
