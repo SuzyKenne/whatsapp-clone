@@ -9,6 +9,7 @@ import React, { useState } from 'react';
 import colors from '../config/colors';
 import Icon from './Icon';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { Stack } from 'expo-router';
 
 interface InterestItem {
   id: number;
@@ -59,6 +60,9 @@ const interests: InterestItem[] = [
   },
 ];
 
+
+const Stack = createNativeStackNavigator();
+
 export default function ListOfInterest({ defaultSelectedId = 1 }: Props) {
   const [selectedId, setSelectedId] = useState(defaultSelectedId);
 
@@ -82,6 +86,40 @@ export default function ListOfInterest({ defaultSelectedId = 1 }: Props) {
           <Text style={[styles.text, isSelected && styles.selectedText]}>
             {item.title}
           </Text>
+
+          <Stack.Navigator
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: '#4CAF50',
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+      }}
+    >
+      <Stack.Screen
+        name="Welcome"
+        component={WelcomeScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Home"
+        component={GetStartedScreen}
+        options={{ title: 'Choose Operation' }}
+      />
+      <Stack.Screen
+        name="Encrypt"
+        component={EncryptScreen}
+        options={{ title: 'Encryption' }}
+      />
+      <Stack.Screen
+        name="Decrypt"
+        component={DecryptScreen}
+        options={{ title: 'Decryption' }}
+      />
+    </Stack.Navigator>
+  );
         </View>
       </TouchableOpacity>
     );
@@ -143,3 +181,7 @@ const styles = StyleSheet.create({
     color: colors.white,
   },
 });
+function createNativeStackNavigator() {
+  throw new Error('Function not implemented.');
+}
+
