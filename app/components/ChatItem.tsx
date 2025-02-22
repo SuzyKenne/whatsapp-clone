@@ -16,6 +16,7 @@ interface ChatItemProps {
   numberOfMessage?: number;
   isUnRead?: boolean;
   isMuted?: boolean;
+  category?: string;
 }
 
 export default function ChatItem({
@@ -31,6 +32,7 @@ export default function ChatItem({
   numberOfMessage,
   isUnRead,
   isMuted,
+  category,
 }: ChatItemProps) {
   return (
     <View style={styles.container}>
