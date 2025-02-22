@@ -11,8 +11,7 @@ import Icon from '../components/Icon';
 import WhasappHeader from '../components/WhasappHeader';
 import CheckNow from '../components/CheckNow';
 import Message from '../components/Message';
-import ListOfInterest from '../components/ListOfInterest';
-import Archived from '../components/Archived';
+import colors from '../config/colors';
 
 export default function HomeScreen() {
   return (
@@ -20,8 +19,6 @@ export default function HomeScreen() {
       <WhasappHeader />
       <CheckNow />
       <ScrollView>
-        <ListOfInterest />
-        <Archived />
         <Message />
       </ScrollView>
     </SafeAreaView>
@@ -30,6 +27,7 @@ export default function HomeScreen() {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: colors.primary,
     flex: 1,
     margin: 10,
   },
