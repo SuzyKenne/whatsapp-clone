@@ -1,50 +1,66 @@
-# Welcome to your Expo app 👋
+# Zustand Guide
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
-
-## Get started
-
-1. Install dependencies
-
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-    npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+## Installation
+To install Zustand in your project, run:
+```sh
+npm install zustand
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+---
 
-## Learn more
+## Setting Up a Store
+Create a `store` folder and add a file named `useStore.js`:
 
-To learn more about developing your project with Expo, look at the following resources:
+```javascript
+import { create } from 'zustand';
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+const useStore = create((set) => ({
+  count: 0,
+  increase: () => set((state) => ({ count: state.count + 1 })),
+  decrease: () => set((state) => ({ count: state.count - 1 })),
+}));
 
-## Join the community
+export default useStore;
+```
 
-Join our community of developers creating universal apps.
+---
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## Using the Store in a Component
+Import and use the store inside your component:
+
+```javascript
+import useStore from '../store/useStore';
+
+const Counter = () => {
+  const { count, increase, decrease } = useStore();
+
+  return (
+    <div>
+      <h1>Count: {count}</h1>
+      <button onClick={increase}>+</button>
+      <button onClick={decrease}>-</button>
+    </div>
+  );
+};
+
+export default Counter;
+```
+
+---
+
+## Running the Project
+Make sure your project is running with:
+```sh
+npm start
+```
+Then, include the `Counter` component in your main `App.js` or another component.
+
+---
+
+## Summary
+✅ Installed Zustand
+✅ Created a store
+✅ Used it in a component
+✅ Updated the state globally 🎉
+
+
